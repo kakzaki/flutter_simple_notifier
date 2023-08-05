@@ -1,0 +1,18 @@
+name: simple_notifier
+description: A simple extension to simplify ValueNotifier usage
+version: 1.0.0
+homepage: https://github.com/kakzaki/simple_notifier
+
+environment:
+  sdk: '>=3.0.5 <4.0.0'
+  flutter: ">=3.3.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
