@@ -10,7 +10,7 @@ class ExampleDI extends StatefulWidget {
 }
 
 class _ExampleDIState extends State<ExampleDI> {
-  final counterCon = Counter4Controller();
+  final counterCon = getIt<Counter4Controller>();
 
   @override
   void initState() {
@@ -47,7 +47,7 @@ class _ExampleDIState extends State<ExampleDI> {
 }
 
 Widget _buildCountText() {
-  final counterCon = Counter4Controller();
+  final counterCon = getIt<Counter4Controller>();
   return counterCon.count.listen(
     builder: (context, value, child) {
       return Text(
@@ -59,7 +59,7 @@ Widget _buildCountText() {
 }
 
 Widget _buildButtonIncrement() {
-  final counterCon = Counter4Controller();
+  final counterCon = getIt<Counter4Controller>();
   return ElevatedButton(
     onPressed: counterCon.increment,
     child: const Text('Increment Counter'),
@@ -67,7 +67,7 @@ Widget _buildButtonIncrement() {
 }
 
 Widget _buildButtonReset() {
-  final counterCon = Counter4Controller();
+  final counterCon = getIt<Counter4Controller>();
   return ElevatedButton(
     onPressed: counterCon.reset,
     child: const Text('Reset Counter'),
