@@ -30,7 +30,7 @@ Make sure you have Flutter installed and set up on your development environment.
 
 ```dart
 import 'package:flutter/material.dart';
-import 'package:simple_notifier/simple_notifier.dart';
+import 'package:simple_notifier/simple_notifier_base_test.dart';
 
 void main() {
   runApp(MyApp());

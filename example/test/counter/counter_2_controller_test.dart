@@ -1,5 +1,4 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:simple_notifier_example/counter/counter_1_controller.dart';
 import 'package:simple_notifier_example/counter/counter_2_controller.dart';
 
 void main() {
