@@ -8,9 +8,9 @@ class Example0 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       appBar: AppBar(
-        title: const Text('Simple Notifier Example 1'),
+        title: const Text('Simple Notifier Example 0'),
       ),
       body: Center(
         child: Column(

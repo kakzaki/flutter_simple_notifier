@@ -8,7 +8,7 @@ class Example1 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Simple Notifier Example 2'),
+        title: const Text('Simple Notifier Example 1'),
       ),
       body: Center(
         child: Column(

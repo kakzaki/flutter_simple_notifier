@@ -25,7 +25,7 @@ class _Example2State extends State<Example2> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Simple Notifier Example 3'),
+        title: const Text('Simple Notifier Example 2'),
       ),
       body: Center(
         child: Column(
