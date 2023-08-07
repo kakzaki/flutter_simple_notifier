@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
   void _goto(BuildContext context, {required Widget page}) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => const Example1()),
+      MaterialPageRoute(builder: (context) => page),
     );
   }
 }
