@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:injectable/injectable.dart';
 import 'example_0.dart';
 import 'example_1.dart';
 import 'example_2.dart';
 import 'example_3.dart';
+import 'example_di.dart';
+import 'injector.dart';
 
-void main() {
+void main() async {
+  await configureDependencies(environment: Environment.dev);
   runApp(const MaterialApp(home: MyApp()));
 }
 
@@ -39,6 +43,11 @@ class MyApp extends StatelessWidget {
             ElevatedButton(
               onPressed: () => _goto(context, page: Example3()),
               child: const Text('Example 3'),
+            ),
+            const SizedBox(height: 8),
+            ElevatedButton(
+              onPressed: () => _goto(context, page: const ExampleDI()),
+              child: const Text('Example DI'),
             ),
           ],
         ),

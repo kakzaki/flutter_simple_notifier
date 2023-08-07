@@ -1,25 +1,26 @@
-import 'dart:js';
-
 import 'package:flutter/material.dart';
-import 'counter/counter_2_controller.dart';
+import 'package:simple_notifier_example/injector.dart';
+import 'counter/counter_4_controller.dart';
 
-class Example2 extends StatefulWidget {
-  const Example2({super.key});
+class ExampleDI extends StatefulWidget {
+  const ExampleDI({super.key});
 
   @override
-  State<Example2> createState() => _Example2State();
+  State<ExampleDI> createState() => _ExampleDIState();
 }
 
-class _Example2State extends State<Example2> {
+class _ExampleDIState extends State<ExampleDI> {
+  final counterCon = Counter4Controller();
+
   @override
   void initState() {
-    Counter2Controller.init();
+    counterCon.init();
     super.initState();
   }
 
   @override
   void dispose() {
-    Counter2Controller.dispose();
+    counterCon.dispose();
     super.dispose();
   }
 
@@ -27,7 +28,7 @@ class _Example2State extends State<Example2> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Simple Notifier Example 2'),
+        title: const Text('Simple Notifier Example DI'),
       ),
       body: Center(
         child: Column(
@@ -46,7 +47,8 @@ class _Example2State extends State<Example2> {
 }
 
 Widget _buildCountText() {
-  return Counter2Controller.count.listen(
+  final counterCon = Counter4Controller();
+  return counterCon.count.listen(
     builder: (context, value, child) {
       return Text(
         'Counter Value: $value',
@@ -57,15 +59,17 @@ Widget _buildCountText() {
 }
 
 Widget _buildButtonIncrement() {
-  return const ElevatedButton(
-    onPressed: Counter2Controller.increment,
-    child: Text('Increment Counter'),
+  final counterCon = Counter4Controller();
+  return ElevatedButton(
+    onPressed: counterCon.increment,
+    child: const Text('Increment Counter'),
   );
 }
 
 Widget _buildButtonReset() {
-  return const ElevatedButton(
-    onPressed: Counter2Controller.reset,
-    child: Text('Reset Counter'),
+  final counterCon = Counter4Controller();
+  return ElevatedButton(
+    onPressed: counterCon.reset,
+    child: const Text('Reset Counter'),
   );
 }
