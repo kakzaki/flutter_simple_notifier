@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'example_0.dart';
 import 'example_1.dart';
 import 'example_2.dart';
+import 'example_3.dart';
 
 void main() {
   runApp(const MaterialApp(home: MyApp()));
@@ -20,13 +22,23 @@ class MyApp extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ElevatedButton(
-              onPressed: () => _gotoExample1(context),
+              onPressed: () => _goto(context, page: Example0()),
+              child: const Text('Example 0'),
+            ),
+            const SizedBox(height: 8),
+            ElevatedButton(
+              onPressed: () => _goto(context, page: const Example1()),
               child: const Text('Example 1'),
             ),
             const SizedBox(height: 8),
             ElevatedButton(
-              onPressed: () => _gotoExample2(context),
+              onPressed: () => _goto(context, page: const Example2()),
               child: const Text('Example 2'),
+            ),
+            const SizedBox(height: 8),
+            ElevatedButton(
+              onPressed: () => _goto(context, page: Example3()),
+              child: const Text('Example 3'),
             ),
           ],
         ),
@@ -34,17 +46,10 @@ class MyApp extends StatelessWidget {
     );
   }
 
-  void _gotoExample1(BuildContext context) {
+  void _goto(BuildContext context, {required Widget page}) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => Example1()),
-    );
-  }
-
-  void _gotoExample2(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const Example2()),
+      MaterialPageRoute(builder: (context) => const Example1()),
     );
   }
 }
