@@ -1,56 +1,50 @@
 import 'package:flutter/material.dart';
-import 'package:simple_notifier/simple_notifier.dart';
+import 'example_1.dart';
+import 'example_2.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MaterialApp(home: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key});
-
-  final _counter = 0.notifier;
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Simple Notifier Example'),
-        ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              _counter.listen(
-                builder: (context, value, child) {
-                  return Text(
-                    'Counter Value: $value',
-                    style: const TextStyle(fontSize: 24),
-                  );
-                },
-              ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: _incrementCounter,
-                child: const Text('Increment Counter'),
-              ),
-              const SizedBox(height: 8),
-              ElevatedButton(
-                onPressed: _resetCounter,
-                child: const Text('Reset Counter'),
-              ),
-            ],
-          ),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Simple Notifier Example'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+              onPressed: () => _gotoExample1(context),
+              child: const Text('Example 1'),
+            ),
+            const SizedBox(height: 8),
+            ElevatedButton(
+              onPressed: () => _gotoExample2(context),
+              child: const Text('Example 2'),
+            ),
+          ],
         ),
       ),
     );
   }
 
-  void _incrementCounter() {
-    _counter.value++;
+  void _gotoExample1(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => Example1()),
+    );
   }
 
-  void _resetCounter() {
-    _counter.value = 0;
+  void _gotoExample2(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const Example2()),
+    );
   }
 }

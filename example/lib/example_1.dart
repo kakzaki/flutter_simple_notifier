@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
 import 'counter/counter_controller.dart';
 
-class Example2 extends StatelessWidget {
-  const Example2({super.key});
+class Example1 extends StatelessWidget {
+  Example1({super.key});
+
+  final _counter = 0.notifier;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Simple Notifier Example 2'),
+        title: const Text('Simple Notifier Example 1'),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            CounterController.count.listen(
+            _counter.listen(
               builder: (context, value, child) {
                 return Text(
                   'Counter Value: $value',
@@ -23,18 +25,26 @@ class Example2 extends StatelessWidget {
               },
             ),
             const SizedBox(height: 20),
-            const ElevatedButton(
-              onPressed: CounterController.increment,
-              child: Text('Increment Counter'),
+            ElevatedButton(
+              onPressed: _incrementCounter,
+              child: const Text('Increment Counter'),
             ),
             const SizedBox(height: 8),
-            const ElevatedButton(
-              onPressed: CounterController.reset,
-              child: Text('Reset Counter'),
+            ElevatedButton(
+              onPressed: _resetCounter,
+              child: const Text('Reset Counter'),
             ),
           ],
         ),
       ),
     );
+  }
+
+  void _incrementCounter() {
+    _counter.value++;
+  }
+
+  void _resetCounter() {
+    _counter.value = 0;
   }
 }

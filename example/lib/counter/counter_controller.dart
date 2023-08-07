@@ -11,4 +11,8 @@ class CounterController {
   static void reset() {
     count.value = 0;
   }
+
+  static void dispose() {
+    count.dispose();
+  }
 }
