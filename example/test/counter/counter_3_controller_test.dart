@@ -1,17 +1,15 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:simple_notifier_example/counter/counter_1_controller.dart';
 import 'package:simple_notifier_example/counter/counter_3_controller.dart';
 
 void main() {
-  // Test for Counter1Controller
-  test('Test Counter1Controller', () {
-    final counterCon = Counter3Controller();
+  // Test for Counter3Controller
+  test('Test Counter3Controller', () {
     // Test the increment method
     counterCon.increment();
     expect(counterCon.count.value, 1);
 
     // Test the reset method
     counterCon.reset();
-    expect(Counter1Controller.count.value, 0);
+    expect(counterCon.count.value, 0);
   });
 }
