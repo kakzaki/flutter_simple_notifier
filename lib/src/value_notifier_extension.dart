@@ -13,7 +13,7 @@ extension ValueNotifierBuilderExtension<T> on ValueNotifier<T> {
   }
 }
 
-/// Generic extension on all types
+/// ValueNotifier extension on all types
 extension ValueNotifierExtension<T> on T {
   ValueNotifier<T> get notifier {
     return ValueNotifier<T>(this);

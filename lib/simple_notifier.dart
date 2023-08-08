@@ -1,1 +1,2 @@
-export 'src/simple_notifier_base.dart';
+export 'src/value_notifier_extension.dart';
+export 'src/deep_value_notifier_extension.dart';
