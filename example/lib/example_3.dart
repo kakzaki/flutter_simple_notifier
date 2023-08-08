@@ -1,10 +1,25 @@
 import 'package:flutter/material.dart';
 import 'counter/counter_3_controller.dart';
 
-class Example3 extends StatelessWidget {
-  Example3({super.key});
+class Example3 extends StatefulWidget {
+  const Example3({super.key});
 
-  final counterCon = Counter3Controller();
+  @override
+  State<Example3> createState() => _Example3State();
+}
+
+class _Example3State extends State<Example3> {
+  @override
+  void initState() {
+    counterCon.init();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    counterCon.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,27 +31,39 @@ class Example3 extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            counterCon.count.listen(
-              builder: (context, value, child) {
-                return Text(
-                  'Counter Value: $value',
-                  style: const TextStyle(fontSize: 24),
-                );
-              },
-            ),
+            _buildCountText(),
             const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: counterCon.increment,
-              child: const Text('Increment Counter'),
-            ),
+            _buildButtonIncrement(),
             const SizedBox(height: 8),
-            ElevatedButton(
-              onPressed: counterCon.reset,
-              child: const Text('Reset Counter'),
-            ),
+            _buildButtonReset(),
           ],
         ),
       ),
     );
   }
+}
+
+Widget _buildCountText() {
+  return counterCon.count.listen(
+    builder: (context, value, child) {
+      return Text(
+        'Counter Value: $value',
+        style: const TextStyle(fontSize: 24),
+      );
+    },
+  );
+}
+
+Widget _buildButtonIncrement() {
+  return ElevatedButton(
+    onPressed: counterCon.increment,
+    child: const Text('Increment Counter'),
+  );
+}
+
+Widget _buildButtonReset() {
+  return ElevatedButton(
+    onPressed: counterCon.reset,
+    child: const Text('Reset Counter'),
+  );
 }

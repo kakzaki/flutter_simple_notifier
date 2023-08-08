@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             ElevatedButton(
-              onPressed: () => _goto(context, page: Example3()),
+              onPressed: () => _goto(context, page: const Example3()),
               child: const Text('Example 3'),
             ),
             const SizedBox(height: 8),
