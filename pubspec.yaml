@@ -1,6 +1,6 @@
 name: simple_notifier
 description: A simple extension to simplify ValueNotifier usage
-version: 1.0.0
+version: 1.0.1
 homepage: https://github.com/kakzaki/simple_notifier
 
 environment:
