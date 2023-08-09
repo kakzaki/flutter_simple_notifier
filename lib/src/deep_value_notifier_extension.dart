@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-///DeepValueNotifier is Custom ValueNotifier class with content-based equality checks:
+/// `DeepValueNotifier` is a custom `ValueNotifier` class with content-based equality checks.
 class DeepValueNotifier<T> extends ValueNotifier<T> {
+  /// Constructs a `DeepValueNotifier` with an initial `value`.
   DeepValueNotifier(T value) : super(value);
 
   @override
@@ -15,21 +16,35 @@ class DeepValueNotifier<T> extends ValueNotifier<T> {
   @override
   int get hashCode => value.hashCode;
 
-  // Add a method to force refresh
+  /// Adds a method to force a refresh by notifying listeners.
   void refresh() {
     notifyListeners();
   }
 }
 
-/// DeepValueNotifier extension on all types
+/// Extension for creating a `DeepValueNotifier` from a value directly.
 extension DeepValueNotifierExtension<T> on T {
+  /// Creates a `DeepValueNotifier` instance with the current value.
   DeepValueNotifier<T> get deepNotifier {
     return DeepValueNotifier<T>(this);
   }
 }
 
-/// DeepValueListenableBuilder extension
+/// Extension for adding convenient methods to `DeepValueNotifier` instances.
 extension DeepValueListenableBuilder<T> on DeepValueNotifier<T> {
+  /// Creates a `ValueListenableBuilder` with the provided `builder` function.
+  ///
+  /// [builder] is a callback that takes a `BuildContext`, the current `value`,
+  /// and an optional `child` widget and returns a widget to build.
+  ///
+  /// Example usage:
+  /// ```dart
+  /// DeepValueNotifier<int> myValueNotifier = 42.deepNotifier;
+  ///
+  /// Widget myWidget = myValueNotifier.listen(builder: (context, value, child) {
+  ///   return Text('Value: $value');
+  /// });
+  /// ```
   Widget listen({
     required Widget Function(BuildContext context, T value, Widget? child)
         builder,

@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ElevatedButton(
-              onPressed: () => _goto(context, page: Example0()),
+              onPressed: () => _goto(context, page: const Example0()),
               child: const Text('Example 0'),
             ),
             const SizedBox(height: 8),

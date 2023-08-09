@@ -1,10 +1,30 @@
 import 'package:flutter/material.dart';
 import 'counter/counter_1_controller.dart';
 
-class Example0 extends StatelessWidget {
-  Example0({super.key});
+class Example0 extends StatefulWidget {
+  const Example0({super.key});
 
+  @override
+  State<Example0> createState() => _Example0State();
+}
+
+class _Example0State extends State<Example0> {
   final _counter = 0.notifier;
+
+  //final DeepValueNotifier<List<int>?> _numbers = DeepValueNotifier(null);
+  late final DeepValueNotifier<List<int>?> _numbers;
+
+  void _fetchNumbers() async {
+    _numbers = null.deepNotifier;
+    await Future.delayed(const Duration(seconds: 3));
+    _numbers.value = [];
+  }
+
+  @override
+  void initState() {
+    _fetchNumbers();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +45,14 @@ class Example0 extends StatelessWidget {
               },
             ),
             const SizedBox(height: 20),
+            _numbers.observe(
+              ifNull: const CircularProgressIndicator(),
+              ifEmpty: const Text("List is empty"),
+              hasData: (value) => Text(
+                '$value',
+              ),
+            ),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: _incrementCounter,
               child: const Text('Increment Counter'),
@@ -42,9 +70,13 @@ class Example0 extends StatelessWidget {
 
   void _incrementCounter() {
     _counter.value++;
+    _numbers.value?.add(_counter.value);
+    _numbers.refresh();
   }
 
   void _resetCounter() {
     _counter.value = 0;
+    _numbers.value = [];
+    _numbers.refresh();
   }
 }
