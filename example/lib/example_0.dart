@@ -11,11 +11,9 @@ class Example0 extends StatefulWidget {
 class _Example0State extends State<Example0> {
   final _counter = 0.notifier;
 
-  //final DeepValueNotifier<List<int>?> _numbers = DeepValueNotifier(null);
-  late final DeepValueNotifier<List<int>?> _numbers;
+  final DeepValueNotifier<List<int>?> _numbers = DeepValueNotifier(null);
 
   void _fetchNumbers() async {
-    _numbers = null.deepNotifier;
     await Future.delayed(const Duration(seconds: 3));
     _numbers.value = [];
   }
