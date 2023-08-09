@@ -1,11 +1,10 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 
 /// A widget that handles different states of data and returns appropriate widgets.
-class DataCheckerWidget extends StatelessWidget {
+class DataCheckerWidget<T> extends StatelessWidget {
   /// The data to be checked.
-  final dynamic data;
+  final T data;
 
   /// Widget to display when the data is null.
   final Widget? ifNull;
@@ -17,7 +16,7 @@ class DataCheckerWidget extends StatelessWidget {
   final Widget? ifError;
 
   /// Callback that returns a widget when the data is present.
-  final Widget Function(dynamic data) hasData;
+  final Widget Function(T data) hasData;
 
   /// Constructs a [DataCheckerWidget].
   ///
@@ -43,7 +42,7 @@ class DataCheckerWidget extends StatelessWidget {
             const Center(
               child: CircularProgressIndicator(),
             );
-      } else if (data is Iterable && data.isEmpty) {
+      } else if (data is Iterable && data == []) {
         return ifEmpty ?? const SizedBox.shrink();
       } else {
         return hasData(data);

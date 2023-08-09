@@ -44,10 +44,10 @@ class _Example0State extends State<Example0> {
             ),
             const SizedBox(height: 20),
             _numbers.observe(
-              ifNull: const CircularProgressIndicator(),
-              ifEmpty: const Text("List is empty"),
-              hasData: (value) => Text(
-                '$value',
+              // ifNull: const CircularProgressIndicator(), //optional
+              // ifEmpty: const Text("List is empty"), //optional
+              hasData: (values) => Text(
+                '$values',
               ),
             ),
             const SizedBox(height: 20),

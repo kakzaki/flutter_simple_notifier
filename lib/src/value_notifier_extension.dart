@@ -46,12 +46,12 @@ extension ValueNotifierBuilderExtension<T> on ValueNotifier<T> {
     Widget? ifNull,
     Widget? ifEmpty,
     Widget? ifError,
-    required Widget Function(dynamic data) hasData,
+    required Widget Function(T data) hasData,
   }) {
     return ValueListenableBuilder<T>(
       valueListenable: this,
       builder: (context, value, Widget? child) {
-        return DataCheckerWidget(
+        return DataCheckerWidget<T>(
           data: value,
           ifNull: ifNull,
           ifEmpty: ifEmpty,
