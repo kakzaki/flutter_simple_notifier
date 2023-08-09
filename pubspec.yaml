@@ -2,8 +2,7 @@ name: simple_notifier
 description: A simple extension to simplify ValueNotifier usage for Flutter applications.
 version: 1.0.1
 homepage: https://kakzaki.dev
-repository:
-  url: https://github.com/kakzaki/simple_notifier.git
+repository: https://github.com/kakzaki/simple_notifier.git
 
 environment:
   sdk: '>=3.0.5 <4.0.0'
