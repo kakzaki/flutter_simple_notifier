@@ -1,50 +1,54 @@
 import 'package:flutter/material.dart';
 
-/// A callback function type used to handle changes when multiple notifiers change.
-typedef MultiListenerCallback = void Function();
+/// A widget that combines and listens to a list of [ValueNotifier] objects and rebuilds when any of them change.
+class MultiValueNotifierBuilder extends StatelessWidget {
+  final List<ValueNotifier>
+      listValueListenable; // List of ValueNotifier objects to listen to.
 
-/// A class that allows you to listen to changes in multiple `ValueNotifier` and `DeepValueNotifier` instances.
-class MultiValueNotifier<T> {
-  final List<ValueNotifier<T>> valueNotifiers;
-  final MultiListenerCallback onChange;
+  /// The builder function for creating the widget based on the combined values of the [ValueNotifier] objects.
+  final Widget Function(BuildContext context, List values, Widget? child)
+      builder;
 
-  /// Constructs a `MultiValueNotifier` with the specified `valueNotifiers`, `deepValueNotifiers`, and an `onChange` callback.
-  MultiValueNotifier({
-    required this.valueNotifiers,
-    required this.onChange,
-  }) {
-    _initListeners();
-  }
+  /// Constructs a [MultiValueNotifierBuilder] widget.
+  ///
+  /// [listValueListenable]: A non-empty list of [ValueNotifier] objects to listen to.
+  /// [builder]: The function used to build the widget with the combined values.
+  const MultiValueNotifierBuilder({
+    Key? key,
+    required this.listValueListenable,
+    required this.builder,
+  })  : assert(listValueListenable.length !=
+            0), // Ensure that the list of ValueNotifiers is not empty.
+        super(key: key);
 
-  /// Initializes listeners for all registered notifiers.
-  void _initListeners() {
-    for (final notifier in valueNotifiers) {
-      notifier.addListener(_handleChange);
-    }
-  }
-
-  /// Handles changes in any of the registered notifiers by invoking the `onChange` callback.
-  void _handleChange() {
-    onChange();
-  }
-
-  /// Disposes of listeners for all registered notifiers.
-  void dispose() {
-    for (final notifier in valueNotifiers) {
-      notifier.removeListener(_handleChange);
-    }
+  @override
+  Widget build(BuildContext context) {
+    // Create an AnimatedBuilder that listens to the merged Listenable of ValueNotifiers.
+    return AnimatedBuilder(
+      animation: Listenable.merge(listValueListenable),
+      builder: (context, child) {
+        // Create a list of values by extracting the current values from each ValueNotifier in the list.
+        final list = listValueListenable.map((listenable) => listenable.value);
+        // Call the builder function with the combined list of values and the child widget.
+        return builder(context, List.unmodifiable(list), child);
+      },
+    );
   }
 }
 
-/// An extension for a list of `ValueNotifier` instances to enable listening to changes in multiple notifiers.
+/// Extension method that simplifies the use of [MultiValueNotifierBuilder] on a list of [ValueNotifier] objects.
 extension MultiListenExtension<T> on List<ValueNotifier<T>> {
-  /// Listens to changes in multiple `ValueNotifier` instances and triggers the `onChange` callback when any of them changes.
+  /// Creates a [MultiValueNotifierBuilder] using this list of [ValueNotifier] objects.
   ///
-  /// The [context] parameter is required for Flutter's context-aware features but is not used in this extension.
-  void multiListen(BuildContext context, MultiListenerCallback onChange) {
-    MultiValueNotifier<T>(
-      valueNotifiers: this,
-      onChange: onChange,
+  /// [builder]: The function used to build the widget with the combined values.
+  Widget listen({
+    required Widget Function(BuildContext context, List values, Widget? child)
+        builder,
+  }) {
+    // Create and return a [MultiValueNotifierBuilder] with the list of ValueNotifiers and the provided builder function.
+    return MultiValueNotifierBuilder(
+      listValueListenable: this,
+      builder: builder,
     );
   }
 }

@@ -4,7 +4,8 @@ import 'package:simple_notifier/simple_notifier.dart';
 import 'package:simple_notifier/src/multi_listen_extension.dart';
 
 void main() {
-  testWidgets('Test multiListen', (WidgetTester tester) async {
+  testWidgets('Test MultiValueNotifierBuilder widget and listen extension',
+      (WidgetTester tester) async {
     // Create some mock notifiers for testing
     final notifier1 = ValueNotifier<int>(1);
     final notifier2 = DeepValueNotifier<int>(2);
@@ -20,12 +21,10 @@ void main() {
     // Build a minimal widget tree for the test, providing a valid BuildContext
     await tester.pumpWidget(
       MaterialApp(
-        home: Builder(
-          builder: (context) {
-            // Use the multiListen extension to listen to changes in notifiers
-            [notifier1, notifier2].multiListen(context, onChange);
-
-            // Return a placeholder widget for the test
+        home: [notifier1, notifier2].listen(
+          builder: (context, values, child) {
+            // Call the onChange callback when the widget is built.
+            onChange();
             return Container();
           },
         ),
@@ -33,12 +32,14 @@ void main() {
     );
 
     // Change the value in one of the notifiers
-    notifier1.value = 42;
+    notifier2.value = 42;
 
     // Wait for the framework to rebuild
     await tester.pump();
 
     // Verify that the callback was called
     expect(callbackCalled, true);
+    expect(notifier1.value, 1);
+    expect(notifier2.value, 42);
   });
 }
