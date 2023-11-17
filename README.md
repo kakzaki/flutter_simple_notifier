@@ -21,7 +21,7 @@ Make sure you have Flutter installed and set up on your development environment.
    dependencies:
      flutter:
        sdk: flutter
-     simple_notifier: ^1.0.0
+     simple_notifier: any
    ```
 3. Run `flutter pub get` to install the package.
 
