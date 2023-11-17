@@ -1,3 +1,7 @@
+## 1.0.6
+
+* Add feature multiListen
+
 ## 1.0.5
 
 * Add feature multiListen
