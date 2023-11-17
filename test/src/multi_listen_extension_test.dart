@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:simple_notifier/simple_notifier.dart';
 
-
 void main() {
   testWidgets('Test MultiValueNotifierBuilder widget and listen extension',
       (WidgetTester tester) async {
