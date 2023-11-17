@@ -21,7 +21,7 @@ void main() {
     await tester.pumpWidget(
       MaterialApp(
         home: [notifier1, notifier2].listen(
-          builder: (context, values, child) {
+          builder: (context, notifiers, child) {
             // Call the onChange callback when the widget is built.
             onChange();
             return Container();

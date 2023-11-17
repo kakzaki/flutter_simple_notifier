@@ -6,8 +6,8 @@ class MultiValueNotifierBuilder extends StatelessWidget {
       listValueListenable; // List of ValueNotifier objects to listen to.
 
   /// The builder function for creating the widget based on the combined values of the [ValueNotifier] objects.
-  final Widget Function(BuildContext context, List values, Widget? child)
-      builder;
+  final Widget Function(
+      BuildContext context, List<ValueNotifier> list, Widget? child) builder;
 
   /// Constructs a [MultiValueNotifierBuilder] widget.
   ///
@@ -28,9 +28,8 @@ class MultiValueNotifierBuilder extends StatelessWidget {
       animation: Listenable.merge(listValueListenable),
       builder: (context, child) {
         // Create a list of values by extracting the current values from each ValueNotifier in the list.
-        final list = listValueListenable.map((listenable) => listenable.value);
-        // Call the builder function with the combined list of values and the child widget.
-        return builder(context, List.unmodifiable(list), child);
+        // Call the builder function with the combined list of ValueNotifiers and the child widget.
+        return builder(context, List.unmodifiable(listValueListenable), child);
       },
     );
   }
@@ -42,7 +41,8 @@ extension MultiListenExtension<T> on List<ValueNotifier<T>> {
   ///
   /// [builder]: The function used to build the widget with the combined values.
   Widget listen({
-    required Widget Function(BuildContext context, List values, Widget? child)
+    required Widget Function(
+            BuildContext context, List<ValueNotifier> notifiers, Widget? child)
         builder,
   }) {
     // Create and return a [MultiValueNotifierBuilder] with the list of ValueNotifiers and the provided builder function.
